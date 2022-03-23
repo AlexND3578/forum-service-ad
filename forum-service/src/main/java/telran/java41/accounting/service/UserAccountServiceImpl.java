@@ -53,7 +53,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 	}
 
 	@Override
-	public RolesResponseDto changeRolesList(String login, String role, boolean isAddRole) {
+	public RolesResponseDto changeRolesList(String login, String role, boolean isAddRole) { //if boolean true add role, if false delete role
 		// TODO Auto-generated method stub
 		return null;
 	}

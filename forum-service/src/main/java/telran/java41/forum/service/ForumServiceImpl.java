@@ -65,6 +65,15 @@ public class ForumServiceImpl implements ForumService {
 		if (tags != null) {
 			tags.forEach(post::addTag);
 		}
+		
+//		if(postUpdateDto.getTags()!=null) {
+//			postUpdateDto.getTags().forEach(tag->{
+//				if(!post.getTags().contains(tag)) {
+//					post.addTag(tag);
+//				}
+//			});
+//		}
+		
 		postRepository.save(post);
 		return modelMapper.map(post, PostDto.class);
 	}
