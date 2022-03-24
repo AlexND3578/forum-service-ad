@@ -58,6 +58,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 		}
 		userAccount.setFirstName(updateDto.getFirstName());
 		userAccount.setLastName(updateDto.getLastName());
+		repository.save(userAccount);
 		return modelMapper.map(userAccount, UserAccountResponseDto.class);
 	}
 
@@ -73,6 +74,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 		} else {
 			userAccount.removeRole(role);
 		}
+		repository.save(userAccount);
 		return modelMapper.map(userAccount, RolesResponseDto.class);
 	}
 
