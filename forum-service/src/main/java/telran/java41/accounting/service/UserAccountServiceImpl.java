@@ -68,7 +68,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 		if (userAccount == null) {
 			return null;
 		}
-		if (isAddRole == true) {
+		if (isAddRole) {
 			userAccount.addRole(role);
 		} else {
 			userAccount.removeRole(role);

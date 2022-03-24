@@ -67,10 +67,10 @@ public class UserAccountController {
 	}
 
 	private String getLoginFromToken(String token) {
-		token = token.split(" ")[1];
-		String decode = new String(Base64.getDecoder().decode(token));
-		String[] credentials = decode.split(":");
-		return credentials[0];
+		token = token.split(" ")[1]; // take a second element from array with token
+		String decode = new String(Base64.getDecoder().decode(token)); // here login and password together as a String
+		String[] credentials = decode.split(":"); // here we have change String to array with two elements: login and password separately
+		return credentials[0]; //here we take first element of array as a login
 	}
 
 }
