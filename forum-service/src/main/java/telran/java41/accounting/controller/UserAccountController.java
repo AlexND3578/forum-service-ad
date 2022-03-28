@@ -1,6 +1,6 @@
 package telran.java41.accounting.controller;
 
-import java.util.Base64;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,9 +35,8 @@ public class UserAccountController {
 	}
 
 	@PostMapping("/login")
-	public UserAccountResponseDto login(@RequestHeader("Authorization") String token) {
-		String login = getLoginFromToken(token);
-		return accountService.getUser(login);
+	public UserAccountResponseDto login(Principal principal) {
+		return accountService.getUser(principal.getName());
 	}
 
 	@DeleteMapping("/user/{login}")
@@ -61,16 +60,15 @@ public class UserAccountController {
 	}
 	
 	@PutMapping("/password")
-	public void changePassword(@RequestHeader("Authorization") String token, @RequestHeader("X-Password")  String newPassword) {
-		String login = getLoginFromToken(token);
-		accountService.changePassword(login, newPassword);
+	public void changePassword(Principal principal, @RequestHeader("X-Password")  String newPassword) {
+		accountService.changePassword(principal.getName(), newPassword);
 	}
 
-	private String getLoginFromToken(String token) {
-		token = token.split(" ")[1]; // take a second element from array with token
-		String decode = new String(Base64.getDecoder().decode(token)); // here login and password together as a String
-		String[] credentials = decode.split(":"); // here we have change String to array with two elements: login and password separately
-		return credentials[0]; //here we take first element of array as a login
-	}
+//	private String getLoginFromToken(String token) {
+//		token = token.split(" ")[1]; // take a second element from array with token
+//		String decode = new String(Base64.getDecoder().decode(token)); // here login and password together as a String
+//		String[] credentials = decode.split(":"); // here we have change String to array with two elements: login and password separately
+//		return credentials[0]; //here we take first element of array as a login
+//	}
 
 }
